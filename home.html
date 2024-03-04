@@ -32,12 +32,13 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="./styles/style.css">
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
 
 </head>
 
 <body>
 
+    
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
@@ -47,51 +48,17 @@
       </nav>
 
       <div class="px-4 py-3 my-5 text-center">
-        <h1 class="display-5 fw-bold">Saving expenses like never before.</h1>
+        <h1 class="display-5 fw-bold">Welcome, <span id="name-goes-here"></span>.</h1>
+        <hr></hr>
         <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Every cent saved is a win, and Schmoney is there to support you on your path to financial stability and freedom.</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-
-            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Start Now!</button>
-
-            <button type="button" onclick="location.href = 'login.html';" class="btn btn-outline-secondary btn-lg px-4">
-              Already Know?
-            </button>
-
-        </div>
+        <p class="lead mb-4">placeholder message after login text placeholder message after login text placeholder message after login text</p>
         </div>
       </div>
 
-
-      <section class="">
         <!-- Footer -->
-        <footer class="text-center text-white fixed-bottom" style="background-color: #D1E7DD;">
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-            <!-- Section: CTA -->
-            <section class="">
-              <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3">Register for free</span>
-                <button type="button" class="btn btn-outline-light btn-rounded">
-                  Sign up!
-                </button>
-              </p>
-            </section>
-            <!-- Section: CTA -->
-          </div>
-          <!-- Grid container -->
-      
-          <!-- Copyright -->
-          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2023 Copyright:
-            <a class="text-white" href="">Schmoney</a>
-          </div>
-          <!-- Copyright -->
+        <footer id="footerPlaceholder" class="text-center text-white fixed-bottom" style="background-color: #D1E7DD;">
         </footer>
         <!-- Footer -->
-      </section>
-
-      </section>
 
     <!------------------------------>
     <!-- Your HTML Layout go here -->
@@ -110,13 +77,11 @@
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
 
-    <script src="./scripts/script.js"></script>
+    <!-- <script src="./scripts/script.js"></script> -->
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
     <script src="./scripts/skeleton.js"></script>
-
-    <script>
-      logout();       //make sure user is logged out
-    </script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/script.js"></script>
 
 </body>
 

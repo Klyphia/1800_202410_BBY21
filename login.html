@@ -32,12 +32,13 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="./styles/style.css">
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
 
 </head>
 
 <body>
 
+    
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
@@ -46,50 +47,21 @@
       <nav id="navbarPlaceholder" class="navbar navbar-expand-lg bg-success-subtle"> <!-- navbar placeholder -->
       </nav>
 
-      <div class="px-4 py-3 my-5 text-center">
-        <h1 class="display-5 fw-bold">Saving expenses like never before.</h1>
-        <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Every cent saved is a win, and Schmoney is there to support you on your path to financial stability and freedom.</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <br><br/>
 
-            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Start Now!</button>
+          <!-- login container -->
+          <div id="firebaseui-auth-container"></div>
 
-            <button type="button" onclick="location.href = 'login.html';" class="btn btn-outline-secondary btn-lg px-4">
-              Already Know?
-            </button>
-
-        </div>
-        </div>
       </div>
 
 
+      <!-- THIS IS WHERE THE FOOTER BEGINS -->
       <section class="">
+        
         <!-- Footer -->
-        <footer class="text-center text-white fixed-bottom" style="background-color: #D1E7DD;">
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-            <!-- Section: CTA -->
-            <section class="">
-              <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3">Register for free</span>
-                <button type="button" class="btn btn-outline-light btn-rounded">
-                  Sign up!
-                </button>
-              </p>
-            </section>
-            <!-- Section: CTA -->
-          </div>
-          <!-- Grid container -->
-      
-          <!-- Copyright -->
-          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2023 Copyright:
-            <a class="text-white" href="">Schmoney</a>
-          </div>
-          <!-- Copyright -->
+        <footer id="footerPlaceholder" class="text-center text-white fixed-bottom" style="background-color: #D1E7DD;">
         </footer>
         <!-- Footer -->
-      </section>
 
       </section>
 
@@ -109,14 +81,14 @@
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
-
-    <script src="./scripts/script.js"></script>
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
     <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/authentication.js"></script>
 
-    <script>
-      logout();       //make sure user is logged out
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
 
 </body>
 
