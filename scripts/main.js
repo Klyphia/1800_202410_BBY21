@@ -18,6 +18,7 @@ function getNameFromAuth() {
 
         } else {
             // No user is signed in.
+            document.getElementById("name-goes-here").innerText = "User";
             console.log ("No user is logged in");
         }
     });
