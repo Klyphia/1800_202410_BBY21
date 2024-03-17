@@ -14,7 +14,9 @@
     <!-------------------------------------------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
@@ -33,6 +35,7 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/savingsgoals.css">
 
 </head>
 
@@ -43,44 +46,115 @@
     <!------------------------------>
 
       <!-- our own navbar goes here -->
-      <nav id="navbarPlaceholder" class="navbar navbar-expand-lg bg-success-subtle">
-      </nav>
-      
-      <!-- navbar placeholder -->
-      
-      <div class="px-4 py-3 my-5 text-center">
-        <h1 class="display-5 fw-bold">savingsgoal placeholder here</h1>
-        <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Lorum Ipsum</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <section id="header">
+        <nav id="navbarPlaceholder" class="navbar navbar-expand-lg bg-success-subtle">
+        </nav>
+        <p></p>
+      </section>
+  
+      <!-- body, starting with total spendings -->
+      <section id="savings">
+  
+        <section>
+          <p></p>
+          <div id="total-spending">
+            <h1 class="display-5 fw-bold text-center">Remaining this Month:</h1>
+            <h1 class="text-center" style="font-size: xx-large; color:green; margin-top: -1vh; margin-bottom: 3vh">
+              
+              <!-- authentication.js: remaining_budget -->
+              $<span id="remaining_budget"></span>
 
-            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Filler</button>
-
-            <button type="button" onclick="location.href = 'login.html';" class="btn btn-outline-secondary btn-lg px-4">
-             Lorum Ipsum
-            </button>
-
-        </div>
-        </div>
-      </div>
-
-
-      <section class="">
-        <!-- Footer -->
-        <footer class="text-center text-white fixed-bottom" style="background-color: #D1E7DD;">
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-            <!-- Section: CTA -->
-            <section class="">
-              <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3">Register for free</span>
-                <button type="button" class="btn btn-outline-light btn-rounded">
-                  Sign up!
-                </button>
-              </p>
-            </section>
-            <!-- Section: CTA -->
+              <p></p>
+            </h1>
+            
+            <div style="--width: 47; margin-top: -8px" data-label="
+            &#8287;&#8287;&#8287;placeholder calculations
+            " class="progress-bar"></div>
+  
+            <!-- redirects to custom goal page -->
+            <a id="total-spending" href="customgoal.html">
+              <img height="30" src="images/pen.png" alt="edit">
+            </a>
+          
           </div>
+          <p></p>
+        </section>
+  
+        <!-- ENTERTAINMENT -->
+        <section id="entertainment">
+  
+          <div class="spending-divider">ENTERTAINMENT</div>
+  
+          <h3>Movies</h3>
+          <div style="--width: 47" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+  
+          <img height="30" src="images/pen.png" alt="edit">
+  
+          <h3>Video Games</h3>
+          <div style="--width: 100" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+        </section>
+  
+        <!--FOOD & DINING -->
+        <section id="food">
+  
+          <div class="spending-divider">FOOD & DINING</div>
+  
+          <h3>Food</h3>
+          <div style="--width: 69" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+          <h3>Groceries</h3>
+          <div style="--width: 82" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+        </section>
+  
+        <!-- EDUCATION -->
+        <section id="education">
+  
+          <div class="spending-divider">EDUCATION</div>
+  
+          <h3>Education</h3>
+          <div style="--width: 47" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+  
+          <img height="30" src="images/pen.png" alt="edit">
+  
+        </section>
+  
+      </section>
+  
+      <!-- inputs from the user -->
+      <section id="inputs">
+        <div class="spending-divider">TRANSACTION JOURNAL</div>
+  
+        recent transactions will be saved here
+  
+      </section>
+  
+      <section id="footer">
+        <br><br/>
+        <!-- Footer -->
+        <footer class="text-center text-white" style="background-color: #D1E7DD;">
           <!-- Grid container -->
       
           <!-- Copyright -->
@@ -91,8 +165,6 @@
           <!-- Copyright -->
         </footer>
         <!-- Footer -->
-      </section>
-
       </section>
 
     <!------------------------------>
@@ -114,10 +186,11 @@
 
     <script src="./scripts/script.js"></script>
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
+    <script src="./scripts/savingsgoals.js"></script>
     <script src="./scripts/skeleton.js"></script>
 
     <script>
-      logout();       //make sure user is logged out
+      // logout();       //make sure user is logged out
     </script>
 
 </body>

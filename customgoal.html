@@ -12,14 +12,16 @@
     <!-------------------------------------------------------->
     <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
     <!-------------------------------------------------------->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <!-- Bootstrap Library CSS CDN go here -->
     <!-- Boostrap Library JS CDN  go here -->
 
@@ -33,59 +35,65 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/savingsgoals.css">
 
 </head>
 
 <body>
 
-    
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
 
       <!-- our own navbar goes here -->
+    <section id="header">
       <nav id="navbarPlaceholder" class="navbar navbar-expand-lg bg-success-subtle">
-    </nav>
+      </nav>
+      <p></p>
+    </section>
 
-      <div class="px-4 py-3 my-5 text-center">
-        <h1 class="display-5 fw-bold">Welcome, <span id="name-goes-here"></span>.</h1>
-        <hr></hr>
-        <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">placeholder message after login text placeholder message after login text placeholder message after login text</p>
+    <!-- body, starting with total spendings -->
+    <section id="savings">
+
+      <section>
+        <p></p>
+        <div id="total-spending">
+          <h1 class="display-5 fw-bold text-center">Remaining Budget:</h1>
         </div>
-      </div>
 
-        <!-- Footer -->
-        <footer id="footerPlaceholder" class="text-center text-white fixed-bottom" style="background-color: #D1E7DD;">
-        </footer>
-        <!-- Footer -->
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Start Now!</button>
 
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
+        <button type="button" onclick="location.href = 'login.html';" class="btn btn-outline-secondary btn-lg px-4">
+          Log In
+        </button>
 
-    <!-- our own navbar goes here -->
-    <!-- <nav id="navbarPlaceholder"></nav> -->
+        <p></p>
 
-    <!-- the body of your page goes here -->
-    <!-- stuff -->
+      </section>
 
-    <!-- our own footer goes here-->
-    <!-- <nav id="footerPlaceholder"></nav> -->
+    <section id="footer">
+      <br><br/>
+      <!-- Footer -->
+      <footer class="text-center text-white" style="background-color: #D1E7DD;">
+        <!-- Grid container -->
+    
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2023 Copyright:
+          <a class="text-white" href="">Schmoney</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+    </section>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/script.js"></script>
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/main.js"></script>
-    <script src="./scripts/script.js"></script>
 
     <script>
       // logout();       //make sure user is logged out
     </script>
-
 </body>
+
 </html>

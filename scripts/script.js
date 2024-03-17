@@ -1,5 +1,5 @@
 //------------------------------------------------
-// Call this function when the "logout" button is clicked
+// Call this function to log user out
 //-------------------------------------------------
 function logout() {
     firebase.auth().signOut().then(() => {
