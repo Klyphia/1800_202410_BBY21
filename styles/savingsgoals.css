@@ -1,0 +1,110 @@
+/* style code for savingsgoals.html */
+
+*, *::before, *::after{
+    box-sizing: border-box;
+  }
+
+  body {
+    animation: fadeIn 1s;
+  }
+
+  .vl { /* vertical line in the progress bars */
+    border-left: 1.5px solid grey;
+    height: 100em;
+    margin-left: 70%;
+  }
+
+  .spending-divider {
+    text-align: center;
+    font-size: large;
+    background-color: lightgray;
+    color: grey;
+    font-family: Arial;
+
+    padding: 5px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 100%;
+  }
+
+  .progress-bar {
+    display: inline-block;
+    /* ^^^ what a save */
+    position: relative;
+    background-color:lightgray;
+    color: white;
+
+    margin-left: 10%;
+    width: 69%;
+
+    /* height: 1.5em; <--- makes it round */
+  }
+
+  #total-spending > .progress-bar {
+    display: inline-block;
+    height: 2em;
+    width: 70%;
+  }
+
+  .progress-bar::before {
+    content: attr(data-label);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0em;
+    top: 0em;
+    bottom: 0em;              /* 0.85% so we have extra space for */
+    width: calc(var(--width, 0) * 0.85%);   /* the max limit line */
+    max-width: calc(100% - 1em);
+    font-size: smaller;
+
+    /* border-radius: 2em; <--- makes it round */
+  }
+
+  #total-spending > .progress-bar::before {
+    background-color:crimson;
+  }
+
+  #entertainment > .progress-bar::before,
+  #food > .progress-bar::before,
+  #education > .progress-bar::before
+  {
+    background-color:green;
+  }
+
+  #entertainment > h3,
+  #food > h3,
+  #education > h3
+  { /* margins text */
+    margin-left: 10%;
+  }
+
+  /******* fade animations *******/
+
+  .fade-in {
+    animation: fadeIn 6s;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  #total-spending > img {
+    margin-top: -28px;
+    margin-left: 7px;
+    opacity: 47%;
+  }
+
+  #entertainment > img,
+  #food > img,
+  #education > img
+  {
+    margin-top: -21px;
+    margin-left: 10px;
+    opacity: 47%;
+  }

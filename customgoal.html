@@ -12,17 +12,18 @@
     <!-------------------------------------------------------->
     <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
     <!-------------------------------------------------------->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <!-- Bootstrap Library CSS CDN go here -->
     <!-- Boostrap Library JS CDN  go here -->
-    
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -34,6 +35,7 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/savingsgoals.css">
 
 </head>
 
@@ -44,75 +46,46 @@
     <!------------------------------>
 
       <!-- our own navbar goes here -->
+    <section id="header">
       <nav id="navbarPlaceholder" class="navbar navbar-expand-lg bg-success-subtle">
       </nav>
-      
-      <!-- navbar placeholder -->
-      
+      <p></p>
+    </section>
 
+    <!-- body, starting with total spendings -->
+    <section id="savings">
 
-      <div class="px-4 py-3 my-5 text-center">
-        <h1 class="display-5 fw-bold">Budget</h1>
-        <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Lorum Ipsum</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-
-            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Filler</button>
-
-            <button type="button" onclick="location.href = 'login.html';" class="btn btn-outline-secondary btn-lg px-4">
-             Lorum Ipsum
-            </button>
-
+      <section>
+        <p></p>
+        <div id="total-spending">
+          <h1 class="display-5 fw-bold text-center">Remaining Budget:</h1>
         </div>
-        </div>
-      </div>
 
-      <section class="">
-        <!-- Footer -->
-        <footer class="text-center text-white fixed-bottom" style="background-color: #D1E7DD;">
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-            <!-- Section: CTA -->
-            <section class="">
-              <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3">Register for free</span>
-                <button type="button" class="btn btn-outline-light btn-rounded">
-                  Sign up!
-                </button>
-              </p>
-            </section>
-            <!-- Section: CTA -->
-          </div>
-          <!-- Grid container -->
-      
-          <!-- Copyright -->
-          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2023 Copyright:
-            <a class="text-white" href="">Schmoney</a>
-          </div>
-          <!-- Copyright -->
-        </footer>
-        <!-- Footer -->
-      </section>
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Start Now!</button>
+
+        <button type="button" onclick="location.href = 'login.html';" class="btn btn-outline-secondary btn-lg px-4">
+          Log In
+        </button>
+
+        <p></p>
 
       </section>
 
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-
-    <!-- our own navbar goes here -->
-    <!-- <nav id="navbarPlaceholder"></nav> -->
-
-    <!-- the body of your page goes here -->
-    <!-- stuff -->
-
-    <!-- our own footer goes here-->
-    <!-- <nav id="footerPlaceholder"></nav> -->
-
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
+    <section id="footer">
+      <br><br/>
+      <!-- Footer -->
+      <footer class="text-center text-white" style="background-color: #D1E7DD;">
+        <!-- Grid container -->
+    
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2023 Copyright:
+          <a class="text-white" href="">Schmoney</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+    </section>
 
     <script src="./scripts/script.js"></script>
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
@@ -121,7 +94,6 @@
     <script>
       // logout();       //make sure user is logged out
     </script>
-
 </body>
 
 </html>
