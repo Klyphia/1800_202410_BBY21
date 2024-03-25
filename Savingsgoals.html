@@ -62,14 +62,14 @@
             <h1 class="text-center" style="font-size: xx-large; color:green; margin-top: -1vh; margin-bottom: 3vh">
               
               <!-- authentication.js: remaining_budget -->
-              $<span id="remaining_budget"></span>
-
+              <span id="remaining-budget"></span>
               <p></p>
             </h1>
-            
-            <div style="--width: 47; margin-top: -8px" data-label="
-            &#8287;&#8287;&#8287;placeholder calculations
-            " class="progress-bar"></div>
+
+            <div id="total-expenses-progress" style="--width: 0%; margin-top: -8px" class="progress-bar">
+              <span id="progress-label"></span><span class="vl"></span>
+              <!-- <span id="expenses"></span> unparse to see value -->
+            </div>
   
             <!-- redirects to custom goal page -->
             <a id="total-spending" href="customgoal.html">
@@ -140,6 +140,75 @@
           <img height="30" src="images/pen.png" alt="edit">
   
         </section>
+
+        <!-- HEALTH & SKINCARE -->
+        <section id="healthcare">
+
+          <div class="spending-divider">HEALTH & SKINCARE</div>
+  
+          <h3>Health</h3>
+          <div style="--width: 69" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+          <h3>Skincare</h3>
+          <div style="--width: 82" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+        </section>
+
+        <!-- OTHER -->
+        <section id="transhousing">
+
+          <div class="spending-divider">TRANSPORTATION & HOUSING</div>
+  
+          <h3>Commute</h3>
+          <div style="--width: 69" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+          <h3>Downpayment</h3>
+          <div style="--width: 82" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+        </section>
+
+        <!-- OTHER -->
+        <section id="other">
+
+          <div class="spending-divider">OTHER</div>
+  
+          <h3>Misc.</h3>
+          <div style="--width: 69" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+          <h3>Paying a friend back</h3>
+          <div style="--width: 82" data-label="
+          &#8287;&#8287;&#8287;placeholder calculations
+          "class="progress-bar"><span class="vl"></span>
+          </div>
+          
+          <img height="30" src="images/pen.png" alt="edit">
+  
+        </section>
   
       </section>
   
@@ -147,7 +216,9 @@
       <section id="inputs">
         <div class="spending-divider">TRANSACTION JOURNAL</div>
   
-        recent transactions will be saved here
+        <div id="recent-transaction">
+          <!-- Recent transaction details will be displayed here -->
+        </div>
   
       </section>
   
@@ -187,6 +258,9 @@
     <script src="./scripts/script.js"></script>
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
     <script src="./scripts/savingsgoals.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/budget.js"></script>
     <script src="./scripts/skeleton.js"></script>
 
     <script>

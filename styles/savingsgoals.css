@@ -46,6 +46,11 @@
     width: 70%;
   }
 
+  /* important code */
+  #total-spending > .progress-bar::before {
+    width: var(--width);
+  }
+
   .progress-bar::before {
     content: attr(data-label);
     display: flex;
@@ -53,10 +58,16 @@
     position: absolute;
     left: 0em;
     top: 0em;
+
     bottom: 0em;              /* 0.85% so we have extra space for */
     width: calc(var(--width, 0) * 0.85%);   /* the max limit line */
-    max-width: calc(100% - 1em);
+    max-width: calc(100% - 0em); /* 120% is max */
+    
     font-size: smaller;
+
+    /* Add this line to position the
+    progress bar below the text */
+    z-index: 1; 
 
     /* border-radius: 2em; <--- makes it round */
   }
@@ -67,16 +78,30 @@
 
   #entertainment > .progress-bar::before,
   #food > .progress-bar::before,
-  #education > .progress-bar::before
+  #education > .progress-bar::before,
+  #healthcare > .progress-bar::before,
+  #transhousing > .progress-bar::before,
+  #other > .progress-bar::before
   {
     background-color:green;
   }
 
   #entertainment > h3,
   #food > h3,
-  #education > h3
+  #education > h3,
+  #healthcare > h3,
+  #transhousing > h3,
+  #other > h3
   { /* margins text */
     margin-left: 10%;
+  }
+
+  /******* tracking spending + journal *******/
+
+  #expenses {
+    margin-right: 80%;
+    position: relative; /* Add this line */
+    z-index: 2; /* Add this line to ensure the text appears above the progress bar */
   }
 
   /******* fade animations *******/
@@ -102,7 +127,10 @@
 
   #entertainment > img,
   #food > img,
-  #education > img
+  #education > img,
+  #healthcare > img,
+  #transhousing > img,
+  #other > img
   {
     margin-top: -21px;
     margin-left: 10px;
