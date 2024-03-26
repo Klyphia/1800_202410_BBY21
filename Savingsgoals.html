@@ -66,8 +66,8 @@
               <p></p>
             </h1>
 
-            <div id="total-expenses-progress" style="--width: 0%; margin-top: -8px" class="progress-bar">
-              <span id="progress-label"></span><span class="vl"></span>
+            <div id="total-expenses-progress" style="--width: 47%; margin-top: -8px" class="progress-bar">
+              <span class="vl"></span>
               <!-- <span id="expenses"></span> unparse to see value -->
             </div>
   
@@ -84,21 +84,12 @@
         <section id="entertainment">
   
           <div class="spending-divider">ENTERTAINMENT</div>
-  
-          <h3>Movies</h3>
-          <div style="--width: 47" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
+
+          <h3>Entertainment</h3>
+          <div id="entertainment-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+            <span class="vl"></span>
           </div>
   
-          <img height="30" src="images/pen.png" alt="edit">
-  
-          <h3>Video Games</h3>
-          <div style="--width: 100" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
-          </div>
-          
           <img height="30" src="images/pen.png" alt="edit">
   
         </section>
@@ -108,20 +99,11 @@
   
           <div class="spending-divider">FOOD & DINING</div>
   
-          <h3>Food</h3>
-          <div style="--width: 69" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
+          <h3>Food & Dining</h3>
+          <div id="food_and_dining-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+            <span class="vl"></span>
           </div>
-          
-          <img height="30" src="images/pen.png" alt="edit">
   
-          <h3>Groceries</h3>
-          <div style="--width: 82" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
-          </div>
-          
           <img height="30" src="images/pen.png" alt="edit">
   
         </section>
@@ -132,9 +114,8 @@
           <div class="spending-divider">EDUCATION</div>
   
           <h3>Education</h3>
-          <div style="--width: 47" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
+          <div id="education-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+            <span class="vl"></span>
           </div>
   
           <img height="30" src="images/pen.png" alt="edit">
@@ -146,18 +127,9 @@
 
           <div class="spending-divider">HEALTH & SKINCARE</div>
   
-          <h3>Health</h3>
-          <div style="--width: 69" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
-          </div>
-          
-          <img height="30" src="images/pen.png" alt="edit">
-  
-          <h3>Skincare</h3>
-          <div style="--width: 82" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
+          <h3>Health & Skincare</h3>
+          <div id="healthcare-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+            <span class="vl"></span>
           </div>
           
           <img height="30" src="images/pen.png" alt="edit">
@@ -169,18 +141,9 @@
 
           <div class="spending-divider">TRANSPORTATION & HOUSING</div>
   
-          <h3>Commute</h3>
-          <div style="--width: 69" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
-          </div>
-          
-          <img height="30" src="images/pen.png" alt="edit">
-  
-          <h3>Downpayment</h3>
-          <div style="--width: 82" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
+          <h3>Transportation & Housing</h3>
+          <div id="transhousing-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+            <span class="vl"></span>
           </div>
           
           <img height="30" src="images/pen.png" alt="edit">
@@ -192,18 +155,9 @@
 
           <div class="spending-divider">OTHER</div>
   
-          <h3>Misc.</h3>
-          <div style="--width: 69" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
-          </div>
-          
-          <img height="30" src="images/pen.png" alt="edit">
-  
-          <h3>Paying a friend back</h3>
-          <div style="--width: 82" data-label="
-          &#8287;&#8287;&#8287;placeholder calculations
-          "class="progress-bar"><span class="vl"></span>
+          <h3>Other</h3>
+          <div id="other-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+            <span class="vl"></span>
           </div>
           
           <img height="30" src="images/pen.png" alt="edit">
@@ -216,11 +170,14 @@
       <section id="inputs">
         <div class="spending-divider">TRANSACTION JOURNAL</div>
   
-        <div id="recent-transaction">
-          <!-- Recent transaction details will be displayed here -->
+        <!-- HTML structure for Recent Transactions tab -->
+        <div id="recent-transactions">
+          <ul id="recent-transactions-list">
+              <!-- Recent transactions will be dynamically added here -->
+          </ul>
         </div>
-  
       </section>
+    
   
       <section id="footer">
         <br><br/>
@@ -257,11 +214,10 @@
 
     <script src="./scripts/script.js"></script>
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
+    <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/savingsgoals.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./scripts/budget.js"></script>
-    <script src="./scripts/skeleton.js"></script>
 
     <script>
       // logout();       //make sure user is logged out

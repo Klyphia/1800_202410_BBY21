@@ -43,6 +43,7 @@ $(document).ready(function() {
                                 $modal.modal('hide');
                                 $inputs.val('');
                                 fetchAndDisplayData(); // Fetch and display updated data
+                                addRecentTransaction(user, category, item, cost); // Add recent transaction
                             })
                             .catch(function(error) {
                                 console.error('Error updating document:', error);
@@ -59,6 +60,7 @@ $(document).ready(function() {
                             $modal.modal('hide');
                             $inputs.val('');
                             fetchAndDisplayData(); // Fetch and display updated data
+                            addRecentTransaction(user, category, item, cost); // Add recent transaction
                         })
                         .catch(function(error) {
                             console.error('Error adding document:', error);
@@ -67,7 +69,23 @@ $(document).ready(function() {
             }
         });
     });
-    
+
+    // Function to add recent transaction
+    function addRecentTransaction(user, category, item, cost) {
+        db.collection('transactions').add({
+            uid: user.uid,
+            category: category,
+            item: item,
+            cost: cost,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .then(function(docRef) {
+            console.log('Recent transaction added with ID:', docRef.id);
+        })
+        .catch(function(error) {
+            console.error('Error adding recent transaction:', error);
+        });
+    }
 
     // Edit button click event (for dynamically added rows)
     $(document).on('click', '.btn-edit', function() {
@@ -111,6 +129,9 @@ $(document).ready(function() {
     // Call fetchAndDisplayData to fetch data and set window.totalExpenses
     fetchAndDisplayData();
 
+    // Declare categoryExpenses outside of fetchAndDisplayData function
+    var categoryExpenses = {};
+
     // Function to fetch and display budget entries
     function fetchAndDisplayData() {
         firebase.auth().onAuthStateChanged(function(user) {
@@ -139,13 +160,20 @@ $(document).ready(function() {
                             totalExpenses += data.cost;
                             
                             window.totalExpenses = totalExpenses;
+
+                            // Calculate total expenses for all categories
+                            totalExpenses += data.cost;
+
+                            // Calculate expenses for each category
+                            if (categoryExpenses[data.category]) {
+                                categoryExpenses[data.category] += data.cost;
+                            } else {
+                                categoryExpenses[data.category] = data.cost;
+                            }
                         });
 
                         // Display total expenses for all categories
                         $('#expenses').text('$' + totalExpenses.toFixed(2) + ' spent');
-
-                        // Update recent transactions when budget entries change
-                        updateRecentTransactions();
                     });
             }
         });
