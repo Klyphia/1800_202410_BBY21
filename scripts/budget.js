@@ -132,52 +132,55 @@ $(document).ready(function() {
     // Declare categoryExpenses outside of fetchAndDisplayData function
     var categoryExpenses = {};
 
-    // Function to fetch and display budget entries
-    function fetchAndDisplayData() {
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                var uid = user.uid;
-                var totalExpenses = 0; // Variable to store total expenses for all categories
+// Function to fetch and display budget entries
+function fetchAndDisplayData() {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            var uid = user.uid;
+            var totalExpenses = 0; // Variable to store total expenses for all categories
 
-                // Query Firestore for user-specific budget data
-                db.collection('budget').where('uid', '==', uid)
-                    .onSnapshot(function(querySnapshot) {
-                        $('tbody').empty(); // Clear existing rows
-                        totalExpenses = 0; // Reset total expenses
+            // Query Firestore for user-specific budget data
+            db.collection('budget').where('uid', '==', uid)
+                .onSnapshot(function(querySnapshot) {
+                    $('tbody').empty(); // Clear existing rows
+                    totalExpenses = 0; // Reset total expenses
 
-                        querySnapshot.forEach(function(doc) {
-                            var data = doc.data();
-                            var row = $('<tr>').appendTo('tbody');
-                            $('<td>').text(data.category).appendTo(row);
-                            $('<td>').text(data.item).appendTo(row);
-                            $('<td>').text(data.cost).appendTo(row);
-                            $('<td>').html('<button class="btn-edit">Edit</button>').appendTo(row);
-                            $('<td>').html('<button class="btn-delete" data-doc-id="' + doc.id + '">Delete</button>').appendTo(row);
-                            // Set the data-doc-id attribute with the Firestore document ID
-                            row.attr('data-doc-id', doc.id);
+                    querySnapshot.forEach(function(doc) {
+                        var data = doc.data();
+                        var row = $('<tr>').appendTo('tbody');
+                        $('<td>').text(data.category).appendTo(row);
+                        $('<td>').text(data.item).appendTo(row);
+                        $('<td>').text(data.cost).appendTo(row);
+                        $('<td>').html('<button class="btn-edit">Edit</button>').appendTo(row);
+                        $('<td>').html('<button class="btn-delete" data-doc-id="' + doc.id + '">Delete</button>').appendTo(row);
+                        // Set the data-doc-id attribute with the Firestore document ID
+                        row.attr('data-doc-id', doc.id);
 
-                            // Calculate total expenses for all categories
-                            totalExpenses += data.cost;
-                            
-                            window.totalExpenses = totalExpenses;
+                        // Calculate total expenses for all categories
+                        totalExpenses += data.cost;
+                        
+                        window.totalExpenses = totalExpenses;
 
-                            // Calculate total expenses for all categories
-                            totalExpenses += data.cost;
+                        // Calculate total expenses for all categories
+                        totalExpenses += data.cost;
 
-                            // Calculate expenses for each category
-                            if (categoryExpenses[data.category]) {
-                                categoryExpenses[data.category] += data.cost;
-                            } else {
-                                categoryExpenses[data.category] = data.cost;
-                            }
-                        });
-
-                        // Display total expenses for all categories
-                        $('#expenses').text('$' + totalExpenses.toFixed(2) + ' spent');
+                        // Calculate expenses for each category
+                        if (categoryExpenses[data.category]) {
+                            categoryExpenses[data.category] += data.cost;
+                        } else {
+                            categoryExpenses[data.category] = data.cost;
+                        }
                     });
-            }
-        });
-    }
+
+                    // Display total expenses for all categories
+                    $('#expenses').text('$' + totalExpenses.toFixed(2) + ' spent');
+                    
+                    // Calculate and display pie chart for category spending
+                    calculateAndDisplayCategorySpending(querySnapshot.docs);
+                });
+        }
+    });
+}
     
     // Handle delete button click event using event delegation on tbody element
     $('tbody').on('click', '.btn-delete', function() {
@@ -194,5 +197,64 @@ $(document).ready(function() {
                 console.error('Error deleting document:', error);
             });
     });
+
+    // Function to calculate total spending for each category and display a pie chart
+function calculateAndDisplayCategorySpending(data) {
+    var categoryTotal = {}; // Object to store total spending for each category
+
+    // Calculate total spending for each category
+    data.forEach(function(doc) {
+        var category = doc.data().category;
+        var cost = doc.data().cost;
+        if (categoryTotal[category]) {
+            categoryTotal[category] += cost;
+        } else {
+            categoryTotal[category] = cost;
+        }
+    });
+
+    // Prepare data for pie chart
+    var categories = Object.keys(categoryTotal);
+    var spendingData = categories.map(function(category) {
+        return {
+            label: category,
+            data: categoryTotal[category],
+            backgroundColor: getRandomColor(),
+        };
+    });
+
+    // Display pie chart using Chart.js
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    var pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: categories,
+            datasets: [{
+                data: spendingData.map(data => data.data),
+                backgroundColor: spendingData.map(data => data.backgroundColor),
+            }],
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Spending by Category',
+            },
+            
+        responsive: true, // Ensure the chart is responsive
+        maintainAspectRatio: true, // Allow aspect ratio to change
+        aspectRatio: 2, // Set aspect ratio to control the size (adjust as needed)
+        },
+    });
+}
+
+// Function to generate random colors for pie chart
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 });
 
