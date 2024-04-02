@@ -44,6 +44,7 @@ $(document).ready(function() {
                                 $inputs.val('');
                                 fetchAndDisplayData(); // Fetch and display updated data
                                 addRecentTransaction(user, category, item, cost); // Add recent transaction
+                                calculateAndDisplayCategorySpending(); // Update pie chart
                             })
                             .catch(function(error) {
                                 console.error('Error updating document:', error);
@@ -102,21 +103,23 @@ $(document).ready(function() {
         $modal.data('row', $row).modal('show');
     });
 
-    // Delete button click event (for dynamically added rows)
-    $(document).on('click', '.btn-delete', function() {
-        var docId = $(this).closest('tr').attr('data-doc-id');
-        
-        $(this).closest('tr').remove();
-        // Delete the specific document from Firestore
-        db.collection('budget').doc(docId).delete()
-            .then(function() {
-                console.log('Document successfully deleted!');
-                // Optionally, remove the row from the UI as well
-            })
-            .catch(function(error) {
-                console.error('Error deleting document:', error);
-            });
-    });
+// Delete button click event (for dynamically added rows)
+$(document).on('click', '.btn-delete', function() {
+    var docId = $(this).closest('tr').attr('data-doc-id');
+    
+    $(this).closest('tr').remove();
+    
+    // Delete the specific document from Firestore
+    db.collection('budget').doc(docId).delete()
+        .then(function() {
+            console.log('Document successfully deleted!');
+            // Update pie chart after deleting the document
+            calculateAndDisplayCategorySpending();
+        })
+        .catch(function(error) {
+            console.error('Error deleting document:', error);
+        });
+});
 
     // Handle modal close event
     $('#editModal').on('hidden.bs.modal', function () {
