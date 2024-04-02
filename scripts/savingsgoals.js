@@ -1,51 +1,116 @@
-// displays data from budget.js to savingsgoals.js
+// displays data from budget.js or customgoal.js > savingsgoals.js
 
 //         important window (global) js variables
 //          call these when you want to use them
 
-// window.totalExpenses = total transactions user has made (in red)
-// window.totalExpensesPercentage = version in %
+window.totalExpenses // total transactions user has made (in red)
+window.totalExpensesPercentage // same thing but in %
 
-// window.RemainingBudget = remaining monthly budget left
+window.RemainingBudget // remaining monthly budget left
+
+ // use food inside timeout of main function
+    window.foodExpenses
+    window.FoodExpensesPercentage
+    window.foodExpensesGoal
+
+ // use entertainment inside timeout of main function
+    window.entertainmentExpenses
+    window.EntertainmentExpensesPercentage
+    window.entertainmentExpensesGoal
+
+ // use education inside timeout of main function
+    window.educationExpenses
+    window.EducationExpensesPercentage
+    window.educationExpensesGoal
+
+ // use healthcare inside timeout of main function
+    window.healthcareExpenses
+    window.HealthcareExpensesPercentage
+    window.healthcareExpensesGoal
+
+// use transhousing inside timeout of main function
+    window.transhousingExpenses
+    window.TranshousingExpensesPercentage
+    window.transhousingExpensesGoal
+
+// use other inside timeout of main function
+    window.otherExpenses
+    window.OtherExpensesPercentage
+    window.otherExpensesGoal
+
+        // Global variables that still need to be figured out:
+        // window.CustomTotalGoal ???
+        // window.monthlyIncome ???
 
 
-// list of global variables that still need to be figured out:
-// window.CustomTotalGoal
-// window.monthlyIncome
+// DRIVER (MAIN) FUNCTION
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        var uid = user.uid;
 
-// window.EntertainmentExpenses
-// window.EntertainmentGoal
+        // fetches data before loading
+        fetchAndAssignExpenses(uid, 'Food & Dining', 'foodExpenses');
+        fetchAndAssignExpenses(uid, 'Entertainment', 'entertainmentExpenses');
+        fetchAndAssignExpenses(uid, 'Education', 'educationExpenses');
+        fetchAndAssignExpenses(uid, 'Health & Skincare', 'healthcareExpenses');
+        fetchAndAssignExpenses(uid, 'Transportation & Housing', 'transhousingExpenses');
+        fetchAndAssignExpenses(uid, 'Other', 'otherExpenses');
 
-// window.FoodExpenses
-// window.FoodGoal
+        // PLACEHOLDER GLOBAL VALUES (can be whatever for now)
+        let customTotalGoal = 2000;
+        let monthlyIncomeInput = 1000;
 
-// window.EducationExpenses
-// window.EducationGoal
+        // 1 second delay to load everything and then access window.totalExpenses
+        setTimeout(function() {
 
-// window.HealthcareExpenses
-// window.HealthcareGoal
+            // Use all the expense variables inside timeout function
+                // console.log('Food & Dining Expenses:', window.foodExpenses);
+                // console.log('Entertainment Expenses:', window.entertainmentExpenses);
+                // console.log('Education Expenses:', window.educationExpenses);
+                // console.log('Health & Skincare Expenses:', window.healthcareExpenses);
+                // console.log('Transportation & Housing Expenses:', window.transHousingExpenses);
+                // console.log('Other Expenses:', window.otherExpenses);
 
-// window.TranshousingExpenses
-// window.TranshousingGoal
+            // progress formula = TOTAL EXPENSES divided by CUSTOMGOAL
+            totalExpensesProgressBar(
+                window.totalExpenses,   // total expenses (budget.html)
+                customTotalGoal         // custom goal (customgoal.html)
+            );
+        
+            // remaining budget formula = MONTHLY INCOME minus TOTAL EXPENSES
+            calculateRemainingBudget(
+                monthlyIncomeInput,     // monthly income (idk somewhere)
+                totalExpenses           // total expenses (budget.html)
+            );
 
-// window.OtherExpenses
-// window.OtherGoal
+            entertainmentExpensesProgressBar(window.entertainmentExpenses, window.entertainmentExpensesGoal);
+            foodExpensesProgressBar(window.foodExpenses, window.foodExpensesGoal);
+            educationExpensesProgressBar(window.educationExpenses, window.educationExpensesGoal);
+            healthcareExpensesProgressBar(window.healthcareExpenses, window.healthcareExpensesGoal);
+            transhousingExpensesProgressBar(window.transhousingExpenses, window.transhousingExpensesGoal);
+            otherExpensesProgressBar(window.otherExpenses, window.otherExpensesGoal);
 
-  
+        }, 1111); // take 1.111 seconds to ensure data loads properly
+    }
+});
+
 // TOTAL EXPENSES FOR PROGRESS BAR
 // TOTAL EXPENSES FOR PROGRESS BAR
 function totalExpensesProgressBar(totalExpenses, customTotalGoal) {
+
     window.totalExpensesPercentage  = Math.round((totalExpenses / customTotalGoal) * 100); // Calculate progress percentage
     const progressBar = document.getElementById('total-expenses-progress');    // Update progress bar width percentage
 
     if (progressBar) {
-      progressBar.style.setProperty('--width', `${window.totalExpensesPercentage }%`);
+      progressBar.style.setProperty('--width', `${window.totalExpensesPercentage}%`);
 
         // checks if 0%
         if (!isNaN(window.totalExpensesPercentage)) {
 
+            progressBar.dataset.label =
             // CHANGE TOTAL EXPENSES LABEL HERE
-            progressBar.dataset.label = `${window.totalExpensesPercentage}% - $${totalExpenses} spent of $${customTotalGoal} monthly goal`;
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            `  ${window.totalExpensesPercentage}% - $${totalExpenses} spent of $${customTotalGoal} monthly`;
 
         } else {
             progressBar.dataset.label = `0%`; // Display default text when totalExpenses is NaN
@@ -53,6 +118,151 @@ function totalExpensesProgressBar(totalExpenses, customTotalGoal) {
     }
 }
 
+// ENTERTAINMENT PROGRESS BAR
+// ENTERTAINMENT PROGRESS BAR
+function entertainmentExpensesProgressBar(Expenses, Goal) {
+    window.EntertainmentExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
+    const progressBar = document.getElementById('entertainment-progress-bar');    // Update progress bar width percentage
+
+    if (progressBar) {
+      progressBar.style.setProperty('--width', `${window.EntertainmentExpensesPercentage}%`);
+
+        // checks if 0%
+        if (!isNaN(window.EntertainmentExpensesPercentage)) {
+
+            progressBar.dataset.label =
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            `  ${window.EntertainmentExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
+
+        } else {
+            progressBar.dataset.label = `0%`; // Display default text when totalExpenses is NaN
+        }
+    }
+}
+
+// FOOD PROGRESS BAR
+// FOOD PROGRESS BAR
+function foodExpensesProgressBar(Expenses, Goal) {
+    window.FoodExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
+    const progressBar = document.getElementById('food_and_dining-progress-bar');    // Update progress bar width percentage
+
+    if (progressBar) {
+      progressBar.style.setProperty('--width', `${window.FoodExpensesPercentage}%`);
+
+        // checks if 0%
+        if (!isNaN(window.FoodExpensesPercentage)) {
+
+            progressBar.dataset.label =
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            `  ${window.FoodExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
+
+        } else {
+            progressBar.dataset.label = `0%`; // Display default text when totalExpenses is NaN
+        }
+    }
+}
+
+// EDUCATION PROGRESS BAR
+// EDUCATION PROGRESS BAR
+function educationExpensesProgressBar(Expenses, Goal) {
+    window.EducationExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
+    const progressBar = document.getElementById('education-progress-bar');    // Update progress bar width percentage
+
+    if (progressBar) {
+      progressBar.style.setProperty('--width', `${window.EducationExpensesPercentage}%`);
+
+        // checks if 0%
+        if (!isNaN(window.EducationExpensesPercentage)) {
+
+            progressBar.dataset.label =
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            `  ${window.EducationExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
+
+        } else {
+            progressBar.dataset.label = `0%`; // Display default text when totalExpenses is NaN
+        }
+    }
+}
+
+// HEALTH & SKINCARE PROGRESS BAR
+// HEALTH & SKINCARE PROGRESS BAR
+function healthcareExpensesProgressBar(Expenses, Goal) {
+    window.HealthcareExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
+    const progressBar = document.getElementById('healthcare-progress-bar');    // Update progress bar width percentage
+
+    if (progressBar) {
+      progressBar.style.setProperty('--width', `${window.HealthcareExpensesPercentage}%`);
+
+        // checks if 0%
+        if (!isNaN(window.HealthcareExpensesPercentage)) {
+
+            progressBar.dataset.label =
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            `  ${window.HealthcareExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
+
+        } else {
+            progressBar.dataset.label = `0%`; // Display default text when totalExpenses is NaN
+        }
+    }
+}
+
+// TRANSPORTATION & HOUSING PROGRESS BAR
+// TRANSPORTATION & HOUSING PROGRESS BAR
+function transhousingExpensesProgressBar(Expenses, Goal) {
+    window.TranshousingExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
+    const progressBar = document.getElementById('transhousing-progress-bar');    // Update progress bar width percentage
+
+    if (progressBar) {
+      progressBar.style.setProperty('--width', `${window.TranshousingExpensesPercentage}%`);
+
+        // checks if 0%
+        if (!isNaN(window.TranshousingExpensesPercentage)) {
+
+            progressBar.dataset.label =
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            `  ${window.TranshousingExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
+
+        } else {
+            progressBar.dataset.label = `0%`; // Display default text when totalExpenses is NaN
+        }
+    }
+}
+
+// OTHER PROGRESS BAR
+// OTHER PROGRESS BAR
+function otherExpensesProgressBar(Expenses, Goal) {
+    window.OtherExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
+    const progressBar = document.getElementById('other-progress-bar');    // Update progress bar width percentage
+
+    if (progressBar) {
+      progressBar.style.setProperty('--width', `${window.OtherExpensesPercentage}%`);
+
+        // checks if 0%
+        if (!isNaN(window.OtherExpensesPercentage)) {
+
+            progressBar.dataset.label =
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            // CHANGE TOTAL EXPENSES LABEL HERE
+            `  ${window.OtherExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
+
+        } else {
+            progressBar.dataset.label = `0%`; // Display default text when totalExpenses is NaN
+        }
+    }
+}
+
+// Function to fetch expenses for a specific category and assign them to the corresponding global variable
+function fetchAndAssignExpenses(userId, category, globalVariable) {
+    fetchCategoryExpenses(userId, category, function(categoryExpense) {
+        // Assign the fetched category expense to the corresponding global variable
+        window[globalVariable] = categoryExpense;
+    });
+}
 
 ///////////// REMAINING BUDGET /////////////
 ///////////// REMAINING BUDGET /////////////
@@ -81,68 +291,7 @@ function calculateRemainingBudget(monthlyIncome, totalExpenses) {
     });
 }
 
-///////////// TOTAL EXPENSES OF EACH CATEGORY /////////////
-///////////// TOTAL EXPENSES OF EACH CATEGORY /////////////
-
-// undefined error, not sure how to fix
-window.foodExpenses = 0;
-window.entertainmentExpenses = 0;
-window.educationExpenses = 0;
-window.healthcareExpenses = 0;
-window.transHousingExpenses = 0;
-window.otherExpenses = 0;
-
-
-// FOOD & DINING
-function fetchFoodExpenses(userId) {
-    fetchCategoryExpenses(userId, 'Food & Dining', function(categoryExpense) {
-        // Update progress bar for Food & Dining category
-        updateProgressBar('food_and_dining-progress-bar', categoryExpense);
-    });
-}
-
-// ENTERTAINMENT
-function fetchEntertainmentExpenses(userId) {
-    fetchCategoryExpenses(userId, 'Entertainment', function(categoryExpense) {
-        // Update progress bar for Entertainment category
-        updateProgressBar('entertainment-progress-bar', categoryExpense);
-    });
-}
-
-// EDUCATION
-function fetchEducationExpenses(userId) {
-    fetchCategoryExpenses(userId, 'Education', function(categoryExpense) {
-        // Update progress bar for Education category
-        updateProgressBar('education-progress-bar', categoryExpense);
-    });
-}
-
-// HEALTH & SKINCARE
-function fetchHealthcareExpenses(userId) {
-    fetchCategoryExpenses(userId, 'Health & Skincare', function(categoryExpense) {
-        // Update progress bar for Healthcare category
-        updateProgressBar('healthcare-progress-bar', categoryExpense);
-    });
-}
-
-// TRANSPORTATION & HOUSING
-function fetchTransHousingExpenses(userId) {
-    fetchCategoryExpenses(userId, 'Transportation & Housing', function(categoryExpense) {
-        // Update progress bar for Transportation & Housing category
-        updateProgressBar('transhousing-progress-bar', categoryExpense);
-    });
-}
-
-// OTHER
-function fetchOtherExpenses(userId) {
-    fetchCategoryExpenses(userId, 'Other', function(categoryExpense) {
-        // Update progress bar for Other category
-        updateProgressBar('other-progress-bar', categoryExpense);
-    });
-}
-
 function fetchCategoryExpenses(userId, category, callback) {
-    var totalExpenses = window.totalExpenses; // Assuming totalExpenses is defined elsewhere
 
     // Query Firestore for budget data of the specified category and user ID
     db.collection('budget')
@@ -164,59 +313,6 @@ function fetchCategoryExpenses(userId, category, callback) {
             console.error('Error getting documents: ', error);
         });
 }
-
-// Update progress bars based on the category expenses
-function updateProgressBar(progressBarId, categoryExpense) {
-    var totalExpenses = window.totalExpenses; // Assuming totalExpenses is defined elsewhere
-
-    var progressPercentage = Math.round((categoryExpense / totalExpenses) * 100);
-    var progressBar = $('#' + progressBarId);
-
-    if (progressBar.length > 0) {
-        progressBar.css('width', progressPercentage + '%');
-        progressBar.text('$' + categoryExpense.toFixed(2));
-    } else {
-        console.error('Progress bar not found for ID:', progressBarId);
-    }
-}
-
-// overall function, anything on page reload related when authenticated
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        var userId = user.uid;
-
-        // Call the respective fetch functions for each category
-        fetchFoodExpenses(userId);
-        fetchEntertainmentExpenses(userId);
-        fetchEducationExpenses(userId);
-        fetchHealthcareExpenses(userId);
-        fetchTransHousingExpenses(userId);
-        fetchOtherExpenses(userId);
-
-        // PLACEHOLDER GLOBAL VALUES (can be whatever for now)
-        let customTotalGoal = 3530;
-        let monthlyIncomeInput = 3530;
-
-
-        // Wait for asynchronous code to complete and then access window.totalExpenses
-        // Check if window.totalExpenses is defined
-        setTimeout(function() {
-
-            // progress formula = TOTAL EXPENSES divided by CUSTOMGOAL
-            totalExpensesProgressBar(
-                window.totalExpenses,   // total expenses (budget.html)
-                customTotalGoal         // custom goal (customgoal.html)
-            );
-        
-            // remaining budget formula = MONTHLY INCOME minus TOTAL EXPENSES
-            calculateRemainingBudget(
-                monthlyIncomeInput,     // monthly income (idk somewhere)
-                totalExpenses           // total expenses (budget.html)
-            );
-
-        }, 1111); // take 1.111 seconds to ensure data loads properly
-    }
-});
 
 ///////////////// RECENT TRANSACTIONS /////////////////
 ///////////////// RECENT TRANSACTIONS /////////////////

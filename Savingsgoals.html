@@ -75,37 +75,36 @@
             <a id="total-spending" href="customgoal.html">
               <img height="30" src="images/pen.png" alt="edit">
             </a>
-          
+
           </div>
           <p></p>
         </section>
   
         <!-- ENTERTAINMENT -->
         <section id="entertainment">
-  
-          <div class="spending-divider">ENTERTAINMENT</div>
 
+          <div class="spending-divider">ENTERTAINMENT</div>
           <h3>Entertainment</h3>
-          <div id="entertainment-progress-bar" style="--width: 80" data-label="" class="progress-bar">
-            <span class="vl"></span>
+
+          <div id="entertainment-progress-bar" style="--width: 0%; margin-top: -8px" class="progress-bar">
+              <span class="vl"></span>
           </div>
-  
-          <img height="30" src="images/pen.png" alt="edit">
-  
+
+          <!-- Use the image as a trigger for the modal -->
+          <img id="openModalBtn-Entertainment" height="30" src="images/pen.png" style="cursor: pointer" alt="edit" onclick="openModal('openModalBtn-Entertainment')">
         </section>
-  
-        <!--FOOD & DINING -->
+
+        <!-- FOOD & DINING -->
         <section id="food">
-  
+
           <div class="spending-divider">FOOD & DINING</div>
-  
           <h3>Food & Dining</h3>
-          <div id="food_and_dining-progress-bar" style="--width: 80" data-label="" class="progress-bar">
-            <span class="vl"></span>
+
+          <div id="food_and_dining-progress-bar" style="--width: 110" data-label="" class="progress-bar">
+              <span class="vl"></span>
           </div>
-  
-          <img height="30" src="images/pen.png" alt="edit">
-  
+
+          <img id="openModalBtn-FoodDining" height="30" src="images/pen.png" style="cursor: pointer" alt="edit" onclick="openModal('openModalBtn-FoodDining')">
         </section>
   
         <!-- EDUCATION -->
@@ -114,11 +113,11 @@
           <div class="spending-divider">EDUCATION</div>
   
           <h3>Education</h3>
-          <div id="education-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+          <div id="education-progress-bar" style="--width: 110" data-label="" class="progress-bar">
             <span class="vl"></span>
           </div>
   
-          <img height="30" src="images/pen.png" alt="edit">
+          <img id="openModalBtn-Education" height="30" src="images/pen.png" style="cursor: pointer" alt="edit" onclick="openModal('openModalBtn-Education')">
   
         </section>
 
@@ -128,25 +127,24 @@
           <div class="spending-divider">HEALTH & SKINCARE</div>
   
           <h3>Health & Skincare</h3>
-          <div id="healthcare-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+          <div id="healthcare-progress-bar" style="--width: 110" data-label="" class="progress-bar">
             <span class="vl"></span>
           </div>
-          
-          <img height="30" src="images/pen.png" alt="edit">
+          <img id="openModalBtn-Healthcare" height="30" src="images/pen.png" style="cursor: pointer" alt="edit" onclick="openModal('openModalBtn-Healthcare')">
   
         </section>
 
-        <!-- OTHER -->
+        <!-- TRANSPORTATION & HOUSING -->
         <section id="transhousing">
 
           <div class="spending-divider">TRANSPORTATION & HOUSING</div>
   
           <h3>Transportation & Housing</h3>
-          <div id="transhousing-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+          <div id="transhousing-progress-bar" style="--width: 110" data-label="" class="progress-bar">
             <span class="vl"></span>
           </div>
           
-          <img height="30" src="images/pen.png" alt="edit">
+          <img id="openModalBtn-Transhousing" height="30" src="images/pen.png" style="cursor: pointer" alt="edit" onclick="openModal('openModalBtn-Transhousing')">
   
         </section>
 
@@ -156,16 +154,18 @@
           <div class="spending-divider">OTHER</div>
   
           <h3>Other</h3>
-          <div id="other-progress-bar" style="--width: 80" data-label="" class="progress-bar">
+          <div id="other-progress-bar" style="--width: 110" data-label="" class="progress-bar">
             <span class="vl"></span>
           </div>
           
-          <img height="30" src="images/pen.png" alt="edit">
+          <img id="openModalBtn-Other" height="30" src="images/pen.png" style="cursor: pointer" alt="edit" onclick="openModal('openModalBtn-Other')">
   
         </section>
   
       </section>
   
+
+
       <!-- inputs from the user -->
       <section id="inputs">
         <div class="spending-divider">TRANSACTION JOURNAL</div>
@@ -196,21 +196,49 @@
       </section>
 
     <!------------------------------>
-    <!-- Your HTML Layout go here -->
+    <!-- Your HTML modal go here -->
     <!------------------------------>
 
-    <!-- our own navbar goes here -->
-    <!-- <nav id="navbarPlaceholder"></nav> -->
-
-    <!-- the body of your page goes here -->
-    <!-- stuff -->
-
-    <!-- our own footer goes here-->
-    <!-- <nav id="footerPlaceholder"></nav> -->
-
+    <!-- Modal for editing -->
+    <div class="modal fade" id="editSpecificElementModal" tabindex="-1" role="dialog" aria-labelledby="editSpecificElementModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="editSpecificElementModalLabel">Edit Category Monthly Goal</h5>
+                  <button type="button" onclick="$('#editSpecificElementModal').modal('toggle');" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                      <label style="margin-bottom: 10px" for="specificElementCategory">Category:</label>
+                      <select class="form-control" id="specificElementCategory">
+                          <option value="Entertainment">Entertainment</option>
+                          <option value="Food & Dining">Food & Dining</option>
+                          <option value="Education">Education</option>
+                          <option value="Health & Skincare">Health & Skincare</option>
+                          <option value="Transportation & Housing">Transportation & Housing</option>
+                          <option value="Other">Other</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label style="margin-top: 10px; margin-bottom: 10px" for="monthlyCategoryGoal">Monthly Goal ($):</label>
+                      <input type="text" class="form-control" id="monthlyCategoryGoal">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" onclick="$('#editSpecificElementModal').modal('toggle');" class="btn btn-secondary">Close</button>
+                  <button type="button" class="btn btn-primary" id="specificElementBtn-save">Save</button>
+              </div>
+          </div>
+      </div>
+    </div>
+  
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="./scripts/script.js"></script>
     <script src="./scripts/firebaseAPI_BBY21.js"></script>
@@ -218,6 +246,7 @@
     <script src="./scripts/savingsgoals.js"></script>
 
     <script src="./scripts/budget.js"></script>
+    <script src="./scripts/categories.js"></script>
 
     <script>
       // logout();       //make sure user is logged out

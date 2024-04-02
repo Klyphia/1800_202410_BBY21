@@ -50,7 +50,7 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
-  width: calc(var(--width, 0) * 0.85%); /* Adjust width as needed */
+  width: calc(var(--width, 0) * 0.85); /* Adjust width as needed */
   max-width: calc(100% - 0); /* Adjust max-width as needed */
   font-size: smaller;
   z-index: -1;
@@ -92,29 +92,6 @@ body {
 }
 
 /* transactions journal section */
-
-#transactions-tab {
-  margin-top: 20px;
-}
-
-#toggle-transactions {
-  cursor: pointer;
-  background-color: #007bff;
-  color: #fff;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-}
-
-#transactions-content {
-  margin-top: 10px;
-}
-
-/* CSS for the toggle effect */
-#transactions-content.minimized {
-  display: none;
-}
 
 .card {
   border: 1px solid #ccc;

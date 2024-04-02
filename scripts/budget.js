@@ -158,11 +158,7 @@ function fetchAndDisplayData() {
 
                         // Calculate total expenses for all categories
                         totalExpenses += data.cost;
-                        
                         window.totalExpenses = totalExpenses;
-
-                        // Calculate total expenses for all categories
-                        totalExpenses += data.cost;
 
                         // Calculate expenses for each category
                         if (categoryExpenses[data.category]) {

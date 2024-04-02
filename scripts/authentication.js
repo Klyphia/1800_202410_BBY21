@@ -25,21 +25,22 @@ var uiConfig = {
                   country: "Canada",                            
                   school: "BCIT",                 
             
-                  monthly_income: 1337.69, // placeholder
+                  // placeholder, remove this if unnecessary
+                  monthly_income: 1337.69,
+
                   total_expenses: 0, // = total transactions
-                  remaining_budget: 0 // = monthly income - total savings goal
+                  remaining_budget: 0, // = monthly income - total savings goal
 
                   // total savings goal
                   // savings_goal: 1000.01,
 
-                  // for limit categories
-                  // spendlimit_movies: 100.01,
-                  // spendlimit_videogames: 100.01,
-
-                  // spendlimit_food: 100.01,
-                  // spendlimit_groceries: 100.01,
-
-                  // spendlimit_education: 100.01
+                  // budget goals for each category
+                  entertainment_goal: 1000.01,
+                  food_goal: 1000.01,
+                  education_goal: 1000.01,
+                  healthcare_goal: 1000.01,
+                  transhousing_goal: 1000.01,
+                  other_goal: 1000.01
                   
                   }).then(function () {
                    console.log("New user added to firestore");
