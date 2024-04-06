@@ -9,3 +9,8 @@ function logout() {
         // An error happened.
       });
 }
+
+// if(document.getElementById('button').clicked == true)
+// {
+//    alert("button was clicked");
+// }

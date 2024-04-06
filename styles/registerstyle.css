@@ -1,20 +1,115 @@
 .gradient-custom-3 {
-    /* fallback for old browsers */
-    background: #84fab0;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+
     }
-    .gradient-custom-4 {
-    /* fallback for old browsers */
-    background: #84fab0;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
-    }
+
+    * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+          'Lucida Sans', Arial, sans-serif;
+        color: black;
+        background-color: white;
+        background-image: url(/images/firewatch.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        
+      }
+      
+      form {
+        max-width: 400px;
+        margin: 35px auto;
+        border-radius: 10px;
+        padding: 10px 15px;
+        background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+      }
+      
+      h1 {
+        margin: 0 0 30px 0;
+        text-align: center;
+        margin-top: 5px;
+      }
+      
+      .alert {
+        text-align: center;
+        padding: 10px;
+        background: rgb(168, 240, 177);
+        color: green;
+        margin-bottom: 10px;
+        display: none;
+      }
+      
+      input[type='text'],
+      input[type='email'],
+      input[type='password'],
+      textarea,
+      select {
+        background: white;
+        border: 1px;
+        margin-bottom: 25px;
+        box-shadow: 2px;
+        color: black;
+        background-color: white;
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+        height: auto;
+        font-size: 15px;
+      }
+      
+      select {
+        padding: 6px;
+        height: 32px;
+        border-radius: 2px;
+      }
+      
+      fieldset {
+        margin-bottom: 30px;
+        border: none;
+      }
+      
+      legend {
+        display: block;
+        margin-bottom: 8px;
+      }
+      
+      label.light {
+        font-weight: 300;
+        display: inline;
+      }
+      
+      .section {
+        background-color: rgb(68, 114, 221);
+        color: white;
+        height: 29px;
+        display: inline-block;
+        width: 29px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 30px;
+        margin-right: 4px;
+        font-size: 0.7em;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+      
+      button {
+        padding: 25px 40px;
+        color: black;
+        background-color: rgba(132, 250, 176, 0.8);
+        font-size: 15px;
+        margin: 30px 0px 0px;
+        width: 100%;
+        text-align: center;
+        border-radius: 5px;
+      }
+      
+      @media screen and (min-width: 480px) {
+        form {
+          max-width: 480px;
+        }
+      }
