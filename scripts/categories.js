@@ -15,6 +15,12 @@ function openModal(categoryFieldId) {
     // fills fields in automatically by default depending on category
     switch (categoryFieldId) {
 
+        // Total Spendings
+        case 'openModalBtn-Total':
+            categoryField.value = 'Total Monthly Goal';
+            monthlyGoalField.value = window.customTotalGoal;
+            break;
+
         // Entertainment
         case 'openModalBtn-Entertainment':
             categoryField.value = 'Entertainment';
@@ -79,6 +85,9 @@ firebase.auth().onAuthStateChanged(function(user) {
                 // Use a switch statement to determine which goal to update based on the category
                 var goalToUpdate;
                 switch (category.toLowerCase()) {
+                    case 'total monthly goal':
+                        goalToUpdate = 'total_goal';
+                        break;
                     case 'entertainment':
                         goalToUpdate = 'entertainment_goal';
                         break;
@@ -108,7 +117,17 @@ firebase.auth().onAuthStateChanged(function(user) {
                 }, { merge: true })
                 .then(function() {
 
-                    // updates the budget goals in real time
+                    // updates the budget goals in real time after saving
+                    totalExpensesProgressBar(
+                        window.totalExpenses,
+                        window.customTotalGoal
+                    );
+                
+                    // remaining budget formula = MONTHLY INCOME minus TOTAL EXPENSES
+                    calculateRemainingBudget(
+                        window.customTotalGoal,
+                        window.totalExpenses
+                    );
                     entertainmentExpensesProgressBar(window.entertainmentExpenses, window.entertainmentExpensesGoal);
                     foodExpensesProgressBar(window.foodExpenses, window.foodExpensesGoal);
                     educationExpensesProgressBar(window.educationExpenses, window.educationExpensesGoal);
@@ -132,12 +151,13 @@ firebase.auth().onAuthStateChanged(function(user) {
             if (doc.exists) {
                 var userData = doc.data();
                 // Update category goals with real-time data
-                window.foodExpensesGoal = userData.food_goal || 1000.01;
-                window.entertainmentExpensesGoal = userData.entertainment_goal || 1000.01;
-                window.educationExpensesGoal = userData.education_goal || 1000.01;
-                window.healthcareExpensesGoal = userData.healthcare_goal || 1000.01;
-                window.transhousingExpensesGoal = userData.transhousing_goal || 1000.01;
-                window.otherExpensesGoal = userData.other_goal || 1000.01;
+                window.customTotalGoal = userData.total_goal || 2000.00;
+                window.foodExpensesGoal = userData.food_goal || 1000.00;
+                window.entertainmentExpensesGoal = userData.entertainment_goal || 1000.00;
+                window.educationExpensesGoal = userData.education_goal || 1000.00;
+                window.healthcareExpensesGoal = userData.healthcare_goal || 1000.00;
+                window.transhousingExpensesGoal = userData.transhousing_goal || 1000.00;
+                window.otherExpensesGoal = userData.other_goal || 1000.00;
 
                 console.log('Category goals updated in real-time!');
             } else {

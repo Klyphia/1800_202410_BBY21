@@ -24,9 +24,8 @@ var uiConfig = {
                    
                   country: "Canada",                            
                   school: "BCIT",                 
-            
-                  // placeholder, remove this if unnecessary
-                  monthly_income: 1337.69,
+
+                  total_goal: 2000,
 
                   total_expenses: 0, // = total transactions
                   remaining_budget: 0, // = monthly income - total savings goal
@@ -35,12 +34,12 @@ var uiConfig = {
                   // savings_goal: 1000.01,
 
                   // budget goals for each category
-                  entertainment_goal: 1000.01,
-                  food_goal: 1000.01,
-                  education_goal: 1000.01,
-                  healthcare_goal: 1000.01,
-                  transhousing_goal: 1000.01,
-                  other_goal: 1000.01
+                  entertainment_goal: 1000.00,
+                  food_goal: 1000.00,
+                  education_goal: 1000.00,
+                  healthcare_goal: 1000.00,
+                  transhousing_goal: 1000.00,
+                  other_goal: 1000.0
                   
                   }).then(function () {
                    console.log("New user added to firestore");

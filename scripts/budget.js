@@ -69,6 +69,7 @@ $(document).ready(function() {
                 }
             }
         });
+        fetchAndDisplayData();
     });
 
     // Function to add recent transaction
@@ -147,7 +148,7 @@ function fetchAndDisplayData() {
                 .onSnapshot(function(querySnapshot) {
                     $('tbody').empty(); // Clear existing rows
                     totalExpenses = 0; // Reset total expenses
-
+                    
                     querySnapshot.forEach(function(doc) {
                         var data = doc.data();
                         var row = $('<tr>').appendTo('tbody');
