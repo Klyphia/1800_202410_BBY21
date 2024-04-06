@@ -6,6 +6,7 @@
 window.totalExpenses // total transactions user has made (in red)
 window.totalExpensesPercentage // same thing but in %
 
+window.customTotalGoal
 window.RemainingBudget // remaining monthly budget left
 
  // use food inside timeout of main function
@@ -56,10 +57,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         fetchAndAssignExpenses(uid, 'Transportation & Housing', 'transhousingExpenses');
         fetchAndAssignExpenses(uid, 'Other', 'otherExpenses');
 
-        // PLACEHOLDER GLOBAL VALUES (can be whatever for now)
-        let customTotalGoal = 2000;
-        let monthlyIncomeInput = 1000;
-
         // 1 second delay to load everything and then access window.totalExpenses
         setTimeout(function() {
 
@@ -74,13 +71,13 @@ firebase.auth().onAuthStateChanged(function (user) {
             // progress formula = TOTAL EXPENSES divided by CUSTOMGOAL
             totalExpensesProgressBar(
                 window.totalExpenses,   // total expenses (budget.html)
-                customTotalGoal         // custom goal (customgoal.html)
+                window.customTotalGoal         // custom goal (customgoal.html)
             );
         
             // remaining budget formula = MONTHLY INCOME minus TOTAL EXPENSES
             calculateRemainingBudget(
-                monthlyIncomeInput,     // monthly income (idk somewhere)
-                totalExpenses           // total expenses (budget.html)
+                window.customTotalGoal,     // monthly income (idk somewhere)
+                window.totalExpenses           // total expenses (budget.html)
             );
 
             entertainmentExpensesProgressBar(window.entertainmentExpenses, window.entertainmentExpensesGoal);
@@ -270,6 +267,11 @@ function calculateRemainingBudget(monthlyIncome, totalExpenses) {
     // Calculate remaining budget
     var remainingBudget = monthlyIncome - totalExpenses;
 
+    // Check if remainingBudget is NaN
+    if (isNaN(remainingBudget)) {
+        remainingBudget = 0.00; // Set to 0.00 if NaN
+    }
+
     // Display remaining budget on the page
     var remainingBudgetElement = document.getElementById('remaining-budget');
     if (remainingBudgetElement) {
@@ -290,6 +292,7 @@ function calculateRemainingBudget(monthlyIncome, totalExpenses) {
         }
     });
 }
+
 
 function fetchCategoryExpenses(userId, category, callback) {
 
@@ -323,7 +326,7 @@ function fetchAndDisplayRecentTransactions() {
 
             db.collection('transactions')
             .where('uid', '==', uid) // Filter documents based on uid
-            .orderBy('timestamp', 'desc') // Order transactions by timestamp in ascending order (earliest first)
+            .orderBy('timestamp', 'desc') // Order transactions by timestamp in descending order
             .onSnapshot(function(querySnapshot) {
                 const recentTransactionsContainer = document.getElementById('recent-transactions-list');
                 recentTransactionsContainer.innerHTML = ''; // Clear previous transactions
@@ -335,28 +338,14 @@ function fetchAndDisplayRecentTransactions() {
                     const card = document.createElement('div');
                     card.classList.add('card');
 
-                    // Create card body
-                    const cardBody = document.createElement('div');
-                    cardBody.classList.add('card-body');
-
                     // Parse timestamp into a Date object
                     const timestamp = transactionData.timestamp.toDate();
 
                     // Format date and time in a user-friendly format
                     const formattedDateTime = `${timestamp.toLocaleDateString()} ${timestamp.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
 
-                    // Populate card body with transaction details including formatted date and time
-                    cardBody.innerHTML = `
-                        <h5 class="card-title">${transactionData.category}</h5>
-                        <p class="card-text">${transactionData.item} - $${transactionData.cost}</p>
-                        <b>${formattedDateTime}</b>
-                    `;
-
-                    // Append card body to card
-                    card.appendChild(cardBody);
-
-                    // Append card to container
-                    recentTransactionsContainer.appendChild(card);
+                    // Check if the transaction belongs to both "transactions" and "budget" collections
+                    checkTransactionAndBudget(transactionData, user, card, formattedDateTime);
                 });
             });
 
@@ -367,5 +356,56 @@ function fetchAndDisplayRecentTransactions() {
     });
 }
 
+// Function to check if a transaction belongs to both "transactions" and "budget" collections
+function checkTransactionAndBudget(transactionData, user, card, formattedDateTime) {
+    const { category, item, cost } = transactionData;
+    const uid = user.uid;
+
+    db.collection('budget')
+        .where('uid', '==', uid) // Filter documents based on uid
+        .where('category', '==', category) // Check if the category matches
+        .where('item', '==', item) // Check if the item matches
+        .where('cost', '==', cost) // Check if the cost matches
+        .get()
+        .then(function(querySnapshot) {
+
+            // Populate card body with transaction details including formatted date and time
+
+            if (!querySnapshot.empty) {
+                // Transaction belongs to both "transactions" and "budget" collections
+                card.style.backgroundColor = 'white'; // White background
+
+                card.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">${category}</h5>
+                    <p class="card-text">"${item}" - $${cost}</p>
+                    <p style="margin-top: -15px; font-weight: 400 !important; font-size: 12px">(item's cost, as of creation)</p>
+                    <b>${formattedDateTime}</b>
+                </div>
+                `;
+                
+            } else {
+                // Transaction does not belong to both collections, card should be pink
+                card.style.backgroundColor = 'pink'; // Pink background
+            
+                card.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">${category} <span style="margin-left: 25px; font-weight: 400 !important; font-size: 12px">(deleted)</span></h5>
+                    <p class="card-text">"${item}" - $${cost}</p>
+                    <b>${formattedDateTime}</b>
+                </div>
+                 `;
+
+            }
+
+            // Append card to container
+            document.getElementById('recent-transactions-list').appendChild(card);
+        })
+        .catch(function(error) {
+            console.error('Error checking transaction and budget:', error);
+        });
+}
+
 // Call fetchAndDisplayRecentTransactions to fetch and display recent transactions
 fetchAndDisplayRecentTransactions();
+
