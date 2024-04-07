@@ -75,19 +75,21 @@ $(document).ready(function() {
     // Function to add recent transaction
     function addRecentTransaction(user, category, item, cost) {
         db.collection('transactions').add({
-            uid: user.uid,
-            category: category,
-            item: item,
-            cost: cost,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          uid: user.uid,
+          category: category,
+          item: item,
+          cost: cost,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
         })
-        .then(function(docRef) {
-            console.log('Recent transaction added with ID:', docRef.id);
+       .then((docRef) => {
+          console.log('Recent transaction added with ID:', docRef.id);
+          // Call checkTotalExpensesAgainstTotalGoal after adding a new transaction
+          checkTotalExpensesAgainstTotalGoal(user);
         })
-        .catch(function(error) {
-            console.error('Error adding recent transaction:', error);
+       .catch((error) => {
+          console.error('Error adding recent transaction:', error);
         });
-    }
+      }
 
     // Edit button click event (for dynamically added rows)
     $(document).on('click', '.btn-edit', function() {
@@ -258,3 +260,20 @@ function getRandomColor() {
 }
 });
 
+// Add this function to check if the user's total expenses have reached or exceeded their total goal
+function checkTotalExpensesAgainstTotalGoal(user) {
+    const userDocRef = db.collection('users').doc(user.uid);
+    userDocRef.get().then((doc) => {
+      if (doc.exists) {
+        const total_goal = doc.data().total_goal;
+        if (window.totalExpenses >= total_goal) {
+          // Display a popup window to alert the user
+          alert('Your total expenses have reached or exceeded your total goal!');
+        }
+      } else {
+        console.log('No such document!');
+      }
+    }).catch((error) => {
+      console.log('Error getting document:', error);
+    });
+  }

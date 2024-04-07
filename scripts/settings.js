@@ -6,6 +6,10 @@ function submitPrivateInfo() {
     var name = document.getElementById('inputFirstName').value + ' ' + document.getElementById('inputLastName').value;
     var email = document.getElementById('inputEmail4').value;
   
+    // Log the name and email variables
+    console.log('Name:', name);
+    console.log('Email:', email);
+  
     // Update the user's profile information
     user.updateProfile({
       displayName: name,
