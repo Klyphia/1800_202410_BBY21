@@ -244,7 +244,7 @@ function calculateAndDisplayCategorySpending(data) {
             
         responsive: true, // Ensure the chart is responsive
         maintainAspectRatio: true, // Allow aspect ratio to change
-        aspectRatio: 2, // Set aspect ratio to control the size (adjust as needed)
+        aspectRatio: 2, 
         },
     });
 }

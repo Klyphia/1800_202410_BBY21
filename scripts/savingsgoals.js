@@ -60,14 +60,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         // 1 second delay to load everything and then access window.totalExpenses
         setTimeout(function() {
 
-            // Use all the expense variables inside timeout function
-                // console.log('Food & Dining Expenses:', window.foodExpenses);
-                // console.log('Entertainment Expenses:', window.entertainmentExpenses);
-                // console.log('Education Expenses:', window.educationExpenses);
-                // console.log('Health & Skincare Expenses:', window.healthcareExpenses);
-                // console.log('Transportation & Housing Expenses:', window.transHousingExpenses);
-                // console.log('Other Expenses:', window.otherExpenses);
-
             // progress formula = TOTAL EXPENSES divided by CUSTOMGOAL
             totalExpensesProgressBar(
                 window.totalExpenses,   // total expenses (budget.html)
@@ -92,7 +84,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 // TOTAL EXPENSES FOR PROGRESS BAR
-// TOTAL EXPENSES FOR PROGRESS BAR
 function totalExpensesProgressBar(totalExpenses, customTotalGoal) {
 
     window.totalExpensesPercentage  = Math.round((totalExpenses / customTotalGoal) * 100); // Calculate progress percentage
@@ -106,7 +97,6 @@ function totalExpensesProgressBar(totalExpenses, customTotalGoal) {
 
             progressBar.dataset.label =
             // CHANGE TOTAL EXPENSES LABEL HERE
-            // CHANGE TOTAL EXPENSES LABEL HERE
             `  ${window.totalExpensesPercentage}% - $${totalExpenses} spent of $${customTotalGoal} monthly`;
 
         } else {
@@ -115,7 +105,6 @@ function totalExpensesProgressBar(totalExpenses, customTotalGoal) {
     }
 }
 
-// ENTERTAINMENT PROGRESS BAR
 // ENTERTAINMENT PROGRESS BAR
 function entertainmentExpensesProgressBar(Expenses, Goal) {
     window.EntertainmentExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
@@ -129,7 +118,6 @@ function entertainmentExpensesProgressBar(Expenses, Goal) {
 
             progressBar.dataset.label =
             // CHANGE TOTAL EXPENSES LABEL HERE
-            // CHANGE TOTAL EXPENSES LABEL HERE
             `  ${window.EntertainmentExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
 
         } else {
@@ -138,7 +126,6 @@ function entertainmentExpensesProgressBar(Expenses, Goal) {
     }
 }
 
-// FOOD PROGRESS BAR
 // FOOD PROGRESS BAR
 function foodExpensesProgressBar(Expenses, Goal) {
     window.FoodExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
@@ -152,7 +139,6 @@ function foodExpensesProgressBar(Expenses, Goal) {
 
             progressBar.dataset.label =
             // CHANGE TOTAL EXPENSES LABEL HERE
-            // CHANGE TOTAL EXPENSES LABEL HERE
             `  ${window.FoodExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
 
         } else {
@@ -161,7 +147,6 @@ function foodExpensesProgressBar(Expenses, Goal) {
     }
 }
 
-// EDUCATION PROGRESS BAR
 // EDUCATION PROGRESS BAR
 function educationExpensesProgressBar(Expenses, Goal) {
     window.EducationExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
@@ -175,7 +160,6 @@ function educationExpensesProgressBar(Expenses, Goal) {
 
             progressBar.dataset.label =
             // CHANGE TOTAL EXPENSES LABEL HERE
-            // CHANGE TOTAL EXPENSES LABEL HERE
             `  ${window.EducationExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
 
         } else {
@@ -184,7 +168,6 @@ function educationExpensesProgressBar(Expenses, Goal) {
     }
 }
 
-// HEALTH & SKINCARE PROGRESS BAR
 // HEALTH & SKINCARE PROGRESS BAR
 function healthcareExpensesProgressBar(Expenses, Goal) {
     window.HealthcareExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
@@ -198,7 +181,6 @@ function healthcareExpensesProgressBar(Expenses, Goal) {
 
             progressBar.dataset.label =
             // CHANGE TOTAL EXPENSES LABEL HERE
-            // CHANGE TOTAL EXPENSES LABEL HERE
             `  ${window.HealthcareExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
 
         } else {
@@ -207,7 +189,6 @@ function healthcareExpensesProgressBar(Expenses, Goal) {
     }
 }
 
-// TRANSPORTATION & HOUSING PROGRESS BAR
 // TRANSPORTATION & HOUSING PROGRESS BAR
 function transhousingExpensesProgressBar(Expenses, Goal) {
     window.TranshousingExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
@@ -221,7 +202,6 @@ function transhousingExpensesProgressBar(Expenses, Goal) {
 
             progressBar.dataset.label =
             // CHANGE TOTAL EXPENSES LABEL HERE
-            // CHANGE TOTAL EXPENSES LABEL HERE
             `  ${window.TranshousingExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
 
         } else {
@@ -230,7 +210,6 @@ function transhousingExpensesProgressBar(Expenses, Goal) {
     }
 }
 
-// OTHER PROGRESS BAR
 // OTHER PROGRESS BAR
 function otherExpensesProgressBar(Expenses, Goal) {
     window.OtherExpensesPercentage = Math.round((Expenses / Goal) * 100); // Calculate progress percentage
@@ -243,7 +222,6 @@ function otherExpensesProgressBar(Expenses, Goal) {
         if (!isNaN(window.OtherExpensesPercentage)) {
 
             progressBar.dataset.label =
-            // CHANGE TOTAL EXPENSES LABEL HERE
             // CHANGE TOTAL EXPENSES LABEL HERE
             `  ${window.OtherExpensesPercentage}% - $${Expenses} spent of $${Goal}`;
 
@@ -261,7 +239,6 @@ function fetchAndAssignExpenses(userId, category, globalVariable) {
     });
 }
 
-///////////// REMAINING BUDGET /////////////
 ///////////// REMAINING BUDGET /////////////
 function calculateRemainingBudget(monthlyIncome, totalExpenses) {
     // Calculate remaining budget
@@ -317,7 +294,6 @@ function fetchCategoryExpenses(userId, category, callback) {
         });
 }
 
-///////////////// RECENT TRANSACTIONS /////////////////
 ///////////////// RECENT TRANSACTIONS /////////////////
 function fetchAndDisplayRecentTransactions() {
     firebase.auth().onAuthStateChanged(function(user) {
